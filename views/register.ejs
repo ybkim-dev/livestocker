@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Live Stocker - Login</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/stylesheets/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <!-- Sidebar - Brand -->
+                
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                        <div>
+                            <br>
+                            <span class="sidebar-brand-icon rotate-n-15 " style="color:white; margin-top:40px; font-size: larger;">
+                                <i class="fas fa-laugh-wink"></i>
+                            </span>
+                            <span class="sidebar-brand-text mx-3" style="color:white; margin-top:40px; font-size: larger;">Live Stocker</span>
+                        </div>
+                        
+                    </a>
+              
+                
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">새로온 친구를 등록해주세요!</h1>
+                                    </div>
+                                    <form action="/animal/register" method="POST" class="user">
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control form-control-user"
+                                                id="inputName" placeholder="이름을 입력하세요!">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="type" class="form-control form-control-user"
+                                                id="inputType" placeholder="가축의 종류는 무엇인가요? ex) pig, cow, goat, sheep">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="parent" class="form-control form-control-user"
+                                                id="inputParent" placeholder="가축의 부모가 있다면 그 부모의 id를 입력하세요!">
+                                        </div>
+                                        <br><br>
+                                        <input type="submit" value="Register animal" class="btn btn-primary btn-user btn-block" >
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/javascripts/sb-admin-2.min.js"></script>
+</body>
+
+</html>

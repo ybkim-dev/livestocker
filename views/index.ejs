@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Live Stocker - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/stylesheets/sb-admin-2.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Live Stocker</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                My Page
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>설정</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">가축 추가 및 삭제:</h6>
+                        <a class="collapse-item" href="/animal/register">가축 추가</a>
+                        <a class="collapse-item" href="/animal/delete">가축 삭제 <i class="fas fa-sad-tear"></i></a>
+                        <h6 class="collapse-header">가격 설정:</h6>
+                        <a class="collapse-item" href="/animal/ransom">가축 시장 가격</a>
+                        <a class="collapse-item" href="/animal/feed/price">사료 가격</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Informations
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>가축 정보</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">자녀 보기:</h6>
+                        <a class="collapse-item" href="/animal/children">자녀 목록 보기</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <!-- <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form> -->
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+
+                        <!-- <div class="topbar-divider d-none d-sm-block"></div> -->
+
+                        <!-- Nav Item - User Information -->
+                        <% if (isLogin == true) { %>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= nickname %></span>
+                                <img class="img-profile rounded-circle" src="/images/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/user/config">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/user/logout" data-toggle="modal"
+                                    data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                        <% } else { %>
+                        <a href="/user/login"
+                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Login</a>
+                        <% } %>
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800"><%= dashboard %></h1>
+                    </div>
+                    <!-- Content Row -->
+                    <div class="row">
+                        <div class="col-auto">
+                            <h5>현재 자산가치: <%= data.animalValue.animalValueFormatted %>원 </h5>
+                            <% var animalCount = data.animalCnt.cowCnt + data.animalCnt.sheepCnt + data.animalCnt.pigCnt + data.animalCnt.goatCnt %>
+                            <h5>현재 가축  수: <%= animalCount %>마리 </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Cow -->
+                        <div class="col-xl-6 col-md-6 mb-4">
+                            <div class="card border-left-cow shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-10">
+                                            <div class="h5 font-weight-bold text-cow text-uppercase mb-1">
+                                                cow</div>
+                                            <div>
+                                                <span
+                                                    class="h5 col-xl-4 mb-0 font-weight-bold text-gray-800"><%= data.animalCnt.cowCnt %>마리</span>
+                                                <span
+                                                    class="h5 col-xl-6 mb-0 font-weight-bold text-gray-800"><%= data.animalValue.cowValueFormatted %></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <img src="images/cow.png" alt="" style="width: 100%;"></img>
+                                            <!-- <i class="fas fa-calendar fa-2x text-gray-300"></i> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sheep -->
+                        <div class="col-xl-6 col-md-6 mb-4">
+                            <div class="card border-left-sheep shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-10">
+                                            <div class="h5 font-weight-bold text-sheep text-uppercase mb-1">
+                                                sheep</div>
+                                            <div>
+                                                <span
+                                                    class="h5 col-xl-4 mb-0 font-weight-bold text-gray-800"><%= data.animalCnt.sheepCnt %>마리</span>
+                                                <span
+                                                    class="h5 col-xl-6 mb-0 font-weight-bold text-gray-800"><%= data.animalValue.sheepValueFormatted %></span>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-2">
+                                            <img src="images/sheep.png" alt="" style="width: 100%;"></img>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pig -->
+                        <div class="col-xl-6 col-md-6 mb-4">
+                            <div class="card border-left-pig shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-10">
+                                            <div class="h5 font-weight-bold text-pig text-uppercase mb-1">pig
+                                            </div>
+                                            <div>
+                                                <span
+                                                    class="h5 col-xl-4 mb-0 font-weight-bold text-gray-800"><%= data.animalCnt.pigCnt %>마리</span>
+                                                <span
+                                                    class="h5 col-xl-6 mb-0 font-weight-bold text-gray-800"><%= data.animalValue.pigValueFormatted %></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <img src="images/pig.png" alt="" style="width: 100%;"></img>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Goat -->
+                        <div class="col-xl- col-md-6 mb-4">
+                            <div class="card border-left-goat shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-10">
+                                            <div class="h5 font-weight-bold text-goat text-uppercase mb-1">
+                                                goat</div>
+                                            <div>
+                                                <span
+                                                    class="h5 col-xl-4 mb-0 font-weight-bold text-gray-800"><%= data.animalCnt.goatCnt %>마리</span>
+                                                <span
+                                                    class="h5 col-xl-6 mb-0 font-weight-bold text-gray-800"><%= data.animalValue.goatValueFormatted %></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <img src="images/goat.png" alt="" style="width: 100%;"></img>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+                        <!-- Pie Chart -->
+                        <div class="col-12">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">동물의 비율</h6>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                            <div class="mr-4">
+                                                <h6 style="text-align: center;">지난 달</h6>
+                                            </div>
+                                            <div class="chart-pie pt-4 pb-2">
+                                                <canvas id="lastPieChart"></canvas>
+                                            </div>
+                                            <div class="mt-4 text-center small">
+                                                <span class="mr-2">
+                                                    <i class="fas fa-circle text-cow"></i> Cow
+                                                </span>
+                                                <span class="mr-2">
+                                                    <i class="fas fa-circle text-sheep"></i> Sheep
+                                                </span>
+                                                <span class="mr-2">
+                                                    <i class="fas fa-circle text-pig"></i> Pig
+                                                </span>
+                                                <span class="mr-2">
+                                                    <i class="fas fa-circle text-goat"></i> Goat
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-body justify-content-center">
+                                            <div class="mr-4">
+                                                <h6 style="text-align: center;">현재</h6>
+                                            </div>
+                                            <div class="chart-pie pt-4 pb-2">
+                                                <canvas id="currentPieChart"></canvas>
+                                            </div>
+                                            <div class="mt-4 text-center small">
+                                                <span class="mr-2">
+                                                    <i class="fas fa-circle text-cow"></i> Cow
+                                                </span>
+                                                <span class="mr-2">
+                                                    <i class="fas fa-circle text-sheep"></i> Sheep
+                                                </span>
+                                                <span class="mr-2">
+                                                    <i class="fas fa-circle text-pig"></i> Pig
+                                                </span>
+                                                <span class="mr-2">
+                                                    <i class="fas fa-circle text-goat"></i> Goat
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <!-- Pie Chart -->
+                        <div class="col-12">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">동물의 수익 창출량</h6>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <!-- Card Body -->
+                                        <div>
+                                            <div class="card-body">
+                                                <div class="chart-bar pt-4 pb-2">
+                                                    <canvas id="lastProfitBarChart"></canvas>
+                                                </div>
+                                                <div class="mt-4 text-center small">
+                                                    <span class="mr-2">
+                                                        지난달 수익
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-body justify-content-center">
+                                            <div>
+                                                <div class="chart-bar pt-4 pb-2">
+                                                    <canvas id="currentProfitBarChart"></canvas>
+                                                </div>
+                                                <div class="mt-4 text-center small">
+                                                    <span class="mr-2">
+                                                        현재 수익
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Pie Chart -->
+                        <div class="col-12">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">자산가치</h6>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div>
+                                            <!-- Card Body -->
+                                            <div class="card-body">
+                                                <div class="chart-bar pt-4 pb-2">
+                                                    <canvas id="valueMonthlyBarChart"></canvas>
+                                                </div>
+                                                <div class="mt-4 text-center small">
+                                                    <span class="mr-2">
+                                                        월별 자산가치
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <!-- Card Body -->
+                                        <div>
+                                            <div class="card-body">
+                                                <div class="chart-bar pt-4 pb-2">
+                                                    <canvas id="valueYearlyBarChart"></canvas>
+                                                </div>
+                                                <div class="mt-4 text-center small">
+                                                    <span class="mr-2">
+                                                        연도별 자산가치
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Arkeio 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/user/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src=" /vendor/jquery/jquery.min.js"></script>
+    <script src=" /vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src=" /vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src=" /javascripts/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <!-- <script src=" /vendor/chart.js/Chart.bundle.js"></script> -->
+
+    <!-- Page level custom scripts -->
+    <!-- <script src=" /javascripts/demo/chart-area-demo.js"></script>
+    <script src=" /javascripts/demo/chart-pie-demo.js"></script> -->
+
+    <!-- pie chart -->
+    <script src="/vendor/chart.js/Chart.js"></script>
+    <script>
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+        var cowData = '<%= data.lastAnimalCnt.cowCnt %>';
+        var sheepData = '<%= data.lastAnimalCnt.sheepCnt %>';
+        var pigData = '<%= data.lastAnimalCnt.pigCnt %>';
+        var goatData = '<%= data.lastAnimalCnt.goatCnt %>';
+        // Pie Chart Example
+        var ctx = document.getElementById("lastPieChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Cow", "sheep", "Pig", "Goat"],
+                datasets: [{
+                    data: [cowData, sheepData, pigData, goatData],
+                    backgroundColor: ['#ffd961', '#fc9797', '#c3ea96', '#bedafa'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
+            },
+        });
+    </script>
+
+    <script>
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+        var cowData = '<%= data.animalCnt.cowCnt %>';
+        var sheepData = '<%= data.animalCnt.sheepCnt %>';
+        var pigData = '<%= data.animalCnt.pigCnt %>';
+        var goatData = '<%= data.animalCnt.goatCnt %>';
+        // Pie Chart Example
+        var ctx = document.getElementById("currentPieChart").getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Cow", "sheep", "Pig", "Goat"],
+                datasets: [{
+                    data: [cowData, sheepData, pigData, goatData],
+                    backgroundColor: ['#ffd961', '#fc9797', '#c3ea96', '#bedafa'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
+            },
+        });
+    </script>
+
+    <script>
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+        var cowData = '<%= data.lastAnimalProfit.cowProfit %>';
+        var sheepData = '<%= data.lastAnimalProfit.sheepProfit %>';
+        var pigData = '<%=data.lastAnimalProfit.pigProfit %>';
+        var goatData = '<%= data.lastAnimalProfit.goatProfit %>';
+
+
+        function number_format(number, decimals, dec_point, thousands_sep) {
+            // *     example: number_format(1234.56, 2, ',', ' ');
+            // *     return: '1 234,56'
+            number = (number + '').replace(',', '').replace(' ', '');
+            var n = !isFinite(+number) ? 0 : +number,
+                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                s = '',
+                toFixedFix = function (n, prec) {
+                    var k = Math.pow(10, prec);
+                    return '' + Math.round(n * k) / k;
+                };
+            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+            if (s[0].length > 3) {
+                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+            }
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
+            return s.join(dec);
+        }
+
+        var ctx = document.getElementById("lastProfitBarChart");
+
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Cow', 'Sheep', 'Pig', 'Goat'],
+                datasets: [{
+                    label: "Revenue",
+                    backgroundColor: ['#ffd961', '#fc9797', '#c3ea96', '#bedafa'],
+                    hoverBackgroundColor: "#2e59d9",
+                    borderColor: "#4e73df",
+                    data: [cowData, sheepData, pigData, goatData],
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 10,
+                        top: 25,
+                        bottom: 10
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: ['month']
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: true
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        },
+                        maxBarThickness: 25,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: -3000000,
+                            max: 40000000,
+                            maxTicksLimit: 5,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function (value, index, values) {
+                                return '₩' + number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [2]
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 14,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function (tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ': ₩' + number_format(tooltipItem.yLabel);
+                        }
+                    }
+                },
+            }
+        });
+    </script>
+
+    <script>
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+        var cowData = '<%= data.animalProfit.cowProfit %>';
+        var sheepData = '<%= data.animalProfit.sheepProfit %>';
+        var pigData = '<%=data.animalProfit.pigProfit %>';
+        var goatData = '<%= data.animalProfit.goatProfit %>';
+
+        function number_format(number, decimals, dec_point, thousands_sep) {
+            // *     example: number_format(1234.56, 2, ',', ' ');
+            // *     return: '1 234,56'
+            number = (number + '').replace(',', '').replace(' ', '');
+            var n = !isFinite(+number) ? 0 : +number,
+                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                s = '',
+                toFixedFix = function (n, prec) {
+                    var k = Math.pow(10, prec);
+                    return '' + Math.round(n * k) / k;
+                };
+            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+            if (s[0].length > 3) {
+                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+            }
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
+            return s.join(dec);
+        }
+
+        var ctx = document.getElementById("currentProfitBarChart");
+
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Cow', 'Sheep', 'Pig', 'Goat'],
+                datasets: [{
+                    label: "Revenue",
+                    backgroundColor: ['#ffd961', '#fc9797', '#c3ea96', '#bedafa'],
+                    hoverBackgroundColor: "#2e59d9",
+                    borderColor: "#4e73df",
+                    data: [cowData, sheepData, pigData, goatData],
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 10,
+                        top: 25,
+                        bottom: 10
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: ['month']
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: true
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        },
+                        maxBarThickness: 25,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: -3000000,
+                            max: 40000000,
+                            maxTicksLimit: 3,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function (value, index, values) {
+                                return '₩' + number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [2]
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 14,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function (tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ': ₩' + number_format(tooltipItem.yLabel);
+                        }
+                    }
+                },
+            }
+        });
+    </script>
+
+    <script>
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+        var lastMonthCowValue = '<%= data.lastAnimalValue.cowValue %>'
+        var lastMonthSheepValue = '<%= data.lastAnimalValue.sheepValue %>'
+        var lastMonthPigValue = '<%= data.lastAnimalValue.pigValue %>'
+        var lastMonthGoatValue = '<%= data.lastAnimalValue.goatValue %>'
+
+        var currentMonthCowValue = '<%= data.animalValue.cowValue %>'
+        var currentMonthSheepValue = '<%= data.animalValue.sheepValue %>'
+        var currentMonthPigValue = '<%= data.animalValue.pigValue %>'
+        var currentMonthGoatValue = '<%= data.animalValue.goatValue %>'
+        var lastMonth = parseInt(lastMonthCowValue) + parseInt(lastMonthSheepValue) + parseInt(lastMonthPigValue) + parseInt(lastMonthGoatValue);
+        var currentMonth = parseInt(currentMonthCowValue) + parseInt(currentMonthSheepValue) + parseInt(currentMonthPigValue) + parseInt(currentMonthGoatValue);
+        function number_format(number, decimals, dec_point, thousands_sep) {
+            // *     example: number_format(1234.56, 2, ',', ' ');
+            // *     return: '1 234,56'
+            number = (number + '').replace(',', '').replace(' ', '');
+            var n = !isFinite(+number) ? 0 : +number,
+                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                s = '',
+                toFixedFix = function (n, prec) {
+                    var k = Math.pow(10, prec);
+                    return '' + Math.round(n * k) / k;
+                };
+            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+            if (s[0].length > 3) {
+                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+            }
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
+            return s.join(dec);
+        }
+
+        var ctx = document.getElementById("valueMonthlyBarChart");
+
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: "Revenue",
+                    backgroundColor: '#4e73df',
+                    hoverBackgroundColor: "#2e59d9",
+                    borderColor: "#4e73df",
+                    data: [0, 0,lastMonth, currentMonth],
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 10,
+                        top: 25,
+                        bottom: 10
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: ['month']
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: true
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        },
+                        maxBarThickness: 25,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: -25000000,
+                            max: 100000000,
+                            maxTicksLimit: 3,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function (value, index, values) {
+                                return '₩' + number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [2]
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 14,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function (tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ': ₩' + number_format(tooltipItem.yLabel);
+                        }
+                    }
+                },
+            }
+        });
+    </script>
+
+    <script>
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+        var lastMonthCowValue = '<%= data.lastAnimalValue.cowValue %>'
+        var lastMonthSheepValue = '<%= data.lastAnimalValue.sheepValue %>'
+        var lastMonthPigValue = '<%= data.lastAnimalValue.pigValue %>'
+        var lastMonthGoatValue = '<%= data.lastAnimalValue.goatValue %>'
+        var currentMonthCowValue = '<%= data.animalValue.cowValue %>'
+        var currentMonthSheepValue = '<%= data.animalValue.sheepValue %>'
+        var currentMonthPigValue = '<%= data.animalValue.pigValue %>'
+        var currentMonthGoatValue = '<%= data.animalValue.goatValue %>'
+        var lastMonth = parseInt(lastMonthCowValue) + parseInt(lastMonthSheepValue) + parseInt(lastMonthPigValue) + parseInt(lastMonthGoatValue);
+        var currentMonth = parseInt(currentMonthCowValue) + parseInt(currentMonthSheepValue) + parseInt(currentMonthPigValue) + parseInt(currentMonthGoatValue);
+        if(lastMonth < currentMonth) {
+            currentYear= currentMonth;
+        } else{
+            currentYear= lastMonth;
+        }
+        function number_format(number, decimals, dec_point, thousands_sep) {
+            // *     example: number_format(1234.56, 2, ',', ' ');
+            // *     return: '1 234,56'
+            number = (number + '').replace(',', '').replace(' ', '');
+            var n = !isFinite(+number) ? 0 : +number,
+                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                s = '',
+                toFixedFix = function (n, prec) {
+                    var k = Math.pow(10, prec);
+                    return '' + Math.round(n * k) / k;
+                };
+            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+            if (s[0].length > 3) {
+                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+            }
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
+            return s.join(dec);
+        }
+
+        var ctx = document.getElementById("valueYearlyBarChart");
+
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2019', '2020'],
+                datasets: [{
+                    label: "Revenue",
+                    backgroundColor: '#4e73df',
+                    hoverBackgroundColor: "#2e59d9",
+                    borderColor: "#4e73df",
+                    data: [0, currentYear],
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 10
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: ['month']
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: true
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        },
+                        maxBarThickness: 25,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: -25000000,
+                            max: 100000000,
+                            maxTicksLimit: 5,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function (value, index, values) {
+                                return '₩' + number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [2]
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 14,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function (tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ': ₩' + number_format(tooltipItem.yLabel);
+                        }
+                    }
+                },
+            }
+        });
+    </script>
+</body>
+
+</html>
